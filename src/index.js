@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './pages/home';
-import NewVideo from './pages/cadastro/video';
-import NewCategory from './pages/cadastro/categoria';
+import NewVideo from './pages/add-new/video';
+import NewCategory from './pages/add-new/category';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 const NotFound = () => (<div>Página 202 * 2</div>)
@@ -13,8 +13,8 @@ ReactDOM.render(
 
     <Switch>
       <Route path = "/" component = {Home} exact />
-      <Route path = "/cadastro/video" component = {NewVideo} />
-      <Route path = "/cadastro/categoria" component = {NewCategory} />
+      <Route path = "/add-new/video" component = {NewVideo} />
+      <Route path = "/add-new/category" component = {NewCategory} />
       <Route component = {NotFound} />
     </Switch>
 
