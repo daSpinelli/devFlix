@@ -2,7 +2,7 @@ import React from 'react';
 import PageDefault from '../../../components/pageDefault';
 import { Link } from 'react-router-dom';
 
-function CadastroVideo() {
+function NewVideo() {
     return (
         <PageDefault>
             <h1>
@@ -16,4 +16,4 @@ function CadastroVideo() {
     )
 }
 
-export default CadastroVideo;
+export default NewVideo;
