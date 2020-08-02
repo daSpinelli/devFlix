@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/pageDefault';
 import FormField from '../../../components/formField';
@@ -27,6 +27,18 @@ function NewCategory() {
       e.target.value,
     );
   }
+
+  useEffect(() => {
+    const URL = 'http://localhost:8080/categories';
+    fetch(URL).then(
+      async (serverResponse) => {
+        const response = await serverResponse.json();
+        setCategory([
+          ...response,
+        ]);
+      },
+    );
+  }, []);
 
   return (
     <PageDefault>
@@ -75,6 +87,14 @@ function NewCategory() {
         </Button>
 
       </form>
+
+      {
+        categories.length === 0 && (
+          <div>
+            Loading...
+          </div>
+        )
+      }
 
       <ul>
 
