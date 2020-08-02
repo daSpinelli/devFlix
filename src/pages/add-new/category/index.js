@@ -29,7 +29,9 @@ function NewCategory() {
   }
 
   useEffect(() => {
-    const URL = 'http://localhost:8080/categories';
+    const URL = window.location.hostname.incluedes('localhost')
+      ? 'http://localhost:8080/categories'
+      : 'https://bem-flix.herokuapp.com/categories';
     fetch(URL).then(
       async (serverResponse) => {
         const response = await serverResponse.json();
