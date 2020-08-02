@@ -1,15 +1,23 @@
-import React from './node_modules/react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function ButtonLink(props) {
-    /* props => {   className: "variável"
+  const { className, link, linkText } = props;
+  /* props => {   className: "variável"
                     href: "variável" }
     */
 
-    return (
-        <a className = {props.className} href = {props.href}>
-           {props.children}
-        </a>
-    );
+  return (
+    <a className={className} href={link}>
+      {linkText}
+    </a>
+  );
 }
+
+ButtonLink.propTypes = {
+  className: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  linkText: PropTypes.string.isRequired,
+};
 
 export default ButtonLink;

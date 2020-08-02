@@ -1,106 +1,99 @@
 import React, { useState } from 'react';
-import PageDefault from '../../../components/pageDefault';
 import { Link } from 'react-router-dom';
+import PageDefault from '../../../components/pageDefault';
+import FormField from '../../../components/formField';
+import Button from '../../../components/button';
 
 function NewCategory() {
-    
-    const initial_values = {
-        name: '',
-        description: '',
-        color: '#000'
-    }
-    
-    const [categories, setCategory] = useState(['Teste']);
-    const [values, setValues] = useState(initial_values);
-    
-    function setValue(key, value) {
-        setValues({
-            ...values,
-            [key]: value
-        })
-    }
+  const initialValues = {
+    name: '',
+    description: '',
+    color: '#000',
+  };
 
-    function handleChange(e) {
-        setValue(
-            e.target.getAttribute('name'),
-            e.target.value
-        );
-    }
+  const [categories, setCategory] = useState([]);
+  const [values, setValues] = useState(initialValues);
 
-    return (
-        <PageDefault>
-            <h1>
-                Cadastro de Categoria: {values.name}
-            </h1>
+  function setValue(key, value) {
+    setValues({
+      ...values,
+      [key]: value,
+    });
+  }
 
-            <form onSubmit = {function handleSubmit(e) {
-                e.preventDefault();
-                setCategory([
-                    ...categories,
-                    values
-                ]);
-            }}>
-                <div>
-                    <label>
-                        Nome da Categoria
-                        <input  
-                            type = "text"
-                            name = "name"
-                            value = {values.name}
-                            onChange = {handleChange}
-                            />
-                    </label>
-                </div>
+  function handleChange(e) {
+    setValue(
+      e.target.getAttribute('name'),
+      e.target.value,
+    );
+  }
 
-                <div>
-                    <label>
-                        Descrição
-                        <textarea  
-                            type = "text"
-                            name = "description"
-                            value = {values.description}
-                            onChange = {handleChange}
-                            />
-                    </label>
-                </div>
+  return (
+    <PageDefault>
+      <h1>
+        Cadastro de Categoria:
+        {' '}
+        {values.name}
+      </h1>
 
-                <div>
-                    <label>
-                        Cor
-                        <input  
-                            type = "color"
-                            name = "color"
-                            value = {values.color}
-                            onChange = {handleChange}
-                            />
-                    </label>
-                </div>
+      <form onSubmit={function handleSubmit(e) {
+        e.preventDefault();
+        setCategory([
+          ...categories,
+          values,
+        ]);
 
-                <button>
-                    Cadastrar
-                </button>
+        setValues({ initialValues });
+      }}
+      >
+        <FormField
+          label="Categoria"
+          type="text"
+          name="name"
+          value={values.name}
+          onChange={handleChange}
+        />
 
-            </form>
+        <FormField
+          label="Descrição"
+          type="textarea"
+          name="description"
+          value={values.description}
+          onChange={handleChange}
+        />
 
-            <ul>
-                
-                {categories.map(
-                    (cat, index) => {
-                        return (
-                            <li key = {`${cat}${index}`} >
-                                {cat.name}
-                            </li>
-                        )
-                    }
-                )}
+        <FormField
+          label="Cor"
+          type="color"
+          name="color"
+          value={values.color}
+          onChange={handleChange}
+        />
 
-            </ul>
+        <Button className="ButtonLink">
+          Cadastrar
+        </Button>
 
-            <Link to = "/">
-                Home
-            </Link>
-        </PageDefault>
-    )
+      </form>
+
+      <ul>
+
+        {categories.map(
+          (cat, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <li key={`${cat}${index}`}>
+              {cat.name}
+            </li>
+          ),
+        )}
+
+      </ul>
+
+      <Link to="/">
+        Home
+      </Link>
+    </PageDefault>
+  );
 }
 
 export default NewCategory;
