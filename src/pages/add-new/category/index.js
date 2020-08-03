@@ -30,7 +30,7 @@ function NewCategory() {
 
   useEffect(() => {
     const URL = window.location.hostname.includes('localhost')
-      ? 'http://localhost:8080/categories'
+      ? 'http://localhost:8080/category'
       : 'https://bem-flix.herokuapp.com/categories';
     fetch(URL).then(
       async (serverResponse) => {
@@ -101,10 +101,10 @@ function NewCategory() {
       <ul>
 
         {categories.map(
-          (cat, index) => (
+          (cat) => (
             // eslint-disable-next-line react/no-array-index-key
-            <li key={`${cat}${index}`}>
-              {cat.name}
+            <li key={`${cat.title}`}>
+              {cat.title}
             </li>
           ),
         )}

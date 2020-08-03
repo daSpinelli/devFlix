@@ -16,19 +16,14 @@ function Home() {
         videoDescription="O que é Front-end?"
       />
 
-      {/* }
-      {videoSetup.map(
-        (cat, index) => {
-          return (
-            <Carousel
-              ignoreFirstVideo
-              category = {cat[index]}
-            />
-          )
-        }
-      )
-      }
-      */}
+      {/* {videoSetup.map(
+        (cat) => (
+          <Carousel
+            ignoreFirstVideo
+            category={cat}
+          />
+        ),
+      )} */}
 
       <Carousel
         ignoreFirstVideo
