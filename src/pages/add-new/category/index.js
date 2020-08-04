@@ -3,30 +3,18 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/pageDefault';
 import FormField from '../../../components/formField';
 import Button from '../../../components/button';
+import useForm from '../../../hooks/useForm';
 
 function NewCategory() {
   const initialValues = {
-    name: '',
+    title: '',
     description: '',
-    color: '#000',
+    color: '#ffffff',
   };
 
+  const { values, handleChange, clearForm } = useForm(initialValues);
+
   const [categories, setCategory] = useState([]);
-  const [values, setValues] = useState(initialValues);
-
-  function setValue(key, value) {
-    setValues({
-      ...values,
-      [key]: value,
-    });
-  }
-
-  function handleChange(e) {
-    setValue(
-      e.target.getAttribute('name'),
-      e.target.value,
-    );
-  }
 
   useEffect(() => {
     const URL = window.location.hostname.includes('localhost')
@@ -47,7 +35,7 @@ function NewCategory() {
       <h1>
         Cadastro de Categoria:
         {' '}
-        {values.name}
+        {values.title}
       </h1>
 
       <form onSubmit={function handleSubmit(e) {
@@ -57,14 +45,14 @@ function NewCategory() {
           values,
         ]);
 
-        setValues({ initialValues });
+        clearForm({ initialValues });
       }}
       >
         <FormField
           label="Categoria"
           type="text"
-          name="name"
-          value={values.name}
+          name="title"
+          value={values.title}
           onChange={handleChange}
         />
 
@@ -84,7 +72,7 @@ function NewCategory() {
           onChange={handleChange}
         />
 
-        <Button className="ButtonLink">
+        <Button>
           Cadastrar
         </Button>
 
@@ -110,7 +98,6 @@ function NewCategory() {
         )}
 
       </ul>
-
       <Link to="/">
         Home
       </Link>
