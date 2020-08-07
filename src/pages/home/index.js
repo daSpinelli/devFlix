@@ -1,63 +1,90 @@
-import React from 'react';
-import Menu from '../../components/menu';
+import React, { useEffect, useState } from 'react';
 import BannerMain from '../../components/bannerMain';
 import Carousel from '../../components/carousel';
-import Footer from '../../components/footer';
-import videoSetup from '../../assets/data/video_setup.json';
+import categoryRepository from '../../repositories/categories';
+import PageDefault from '../../components/pageDefault';
 
 function Home() {
-  return (
-    <div style={{ background: '#141414' }}>
-      <Menu />
+  const [videoSetup, setVideoSetup] = useState([]);
 
-      <BannerMain
-        videoTitle={videoSetup.category[0].videos[0].title}
-        url={videoSetup.category[0].videos[0].url}
+  useEffect(() => {
+    categoryRepository.getAllWithVideos().then(
+      (serverResponse) => {
+        setVideoSetup(serverResponse);
+      },
+    ).catch(
+      (err) => {
+        console.log(err.message);
+      },
+    );
+  }, []);
+
+  return (
+    <PageDefault paddingAll={0}>
+      {videoSetup.length === 0 && (<div>Loading...</div>)}
+
+      {videoSetup.map((category, index) => {
+        if (index === 0) {
+          return (
+            <div key={category.id}>
+              <BannerMain
+                videoTitle={videoSetup[0].videos[0].title}
+                url={videoSetup[0].videos[0].url}
+                videoDescription="O que é Front-end?"
+              />
+
+              <Carousel
+                ignoreFirstVideo
+                category={videoSetup[0]}
+              />
+            </div>
+          );
+        }
+
+        return (
+          <Carousel
+            key={category.id}
+            category={category}
+          />
+        );
+      })}
+
+      {/*  <BannerMain
+        videoTitle={videoSetup.categories[0].videos[0].title}
+        url={videoSetup.categories[0].videos[0].url}
         videoDescription="O que é Front-end?"
       />
 
-      {/* {videoSetup.map(
-        (cat) => (
-          <Carousel
-            ignoreFirstVideo
-            category={cat}
-          />
-        ),
-      )} */}
-
       <Carousel
         ignoreFirstVideo
-        category={videoSetup.category[0]}
+        category={videoSetup.categories[0]}
       />
 
       <Carousel
         ignoreFirstVideo
-        category={videoSetup.category[1]}
+        category={videoSetup.categories[1]}
       />
 
       <Carousel
         ignoreFirstVideo
-        category={videoSetup.category[2]}
+        category={videoSetup.categories[2]}
       />
 
       <Carousel
         ignoreFirstVideo
-        category={videoSetup.category[3]}
+        category={videoSetup.categories[3]}
       />
 
       <Carousel
         ignoreFirstVideo
-        category={videoSetup.category[4]}
+        category={videoSetup.categories[4]}
       />
 
       <Carousel
         ignoreFirstVideo
-        category={videoSetup.category[5]}
-      />
-
-      <Footer />
-
-    </div>
+        category={videoSetup.categories[5]}
+      /> */}
+    </PageDefault>
   );
 }
 

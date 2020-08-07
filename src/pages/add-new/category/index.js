@@ -13,12 +13,11 @@ function NewCategory() {
   };
 
   const { values, handleChange, clearForm } = useForm(initialValues);
-
   const [categories, setCategory] = useState([]);
 
   useEffect(() => {
     const URL = window.location.hostname.includes('localhost')
-      ? 'http://localhost:8080/category'
+      ? 'http://localhost:8080/categories'
       : 'https://bem-flix.herokuapp.com/categories';
     fetch(URL).then(
       async (serverResponse) => {

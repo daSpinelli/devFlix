@@ -50,10 +50,11 @@ function Carousel({
 
 Carousel.defaultProps = {
   category: [],
+  ignoreFirstVideo: true,
 };
 
 Carousel.propTypes = {
-  ignoreFirstVideo: PropTypes.bool.isRequired,
+  ignoreFirstVideo: PropTypes.bool,
   category: PropTypes.string,
 };
 
